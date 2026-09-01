@@ -1,0 +1,17 @@
+# Environment variables & secrets
+.env
+.env.*
+
+# Python Cache & Testing artifacts
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.benchmarks/
+
+# Ignore all user data files (PDFs, CSVs, Excel, JSON) but preserve empty data/ folder
+data/*
+!data/.gitkeep
+
+# Ignore binary Word documents
+*.docx
