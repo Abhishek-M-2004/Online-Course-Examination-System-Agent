@@ -19,14 +19,14 @@ In LLM-based architectures, language models excel at reasoning and natural langu
 
 ```
 [ User Natural Language Request ] 
-(e.g., "Read the OS question bank and Applied Materials allocation. Check 1-mark questions for a 60-mark exam and count students.")
+(e.g., "Read the OS question bank and student allocation spreadsheet. Check 1-mark questions for a 60-mark exam and count students.")
                            │
                            ▼
 ┌────────────────────────────────────────────────────────────────────────┐
 │             ToolAugmentedExamAgent.select_best_matching_files()        │
 │  • Scans data/ for available pools & rosters                           │
 │  • Scores relevance (score_file_relevance) with typo normalization     │
-│  • Discovers: 'data/os_questions.pdf' & 'data/Applied Materials.xlsx'   │
+│  • Discovers: 'data/os_questions.pdf' & 'data/student_allocation.xlsx' │
 └────────────────────────────────────────────────────────────────────────┘
                            │
                            ▼
@@ -206,7 +206,7 @@ python lab2_demo.py
 | Option | Demo Name | What It Demonstrates |
 |---|---|---|
 | **1** | Tool 1: Question Pool Reader | Extracts questions from any PDF (e.g. `data/os_questions.pdf`), CSV, or JSON. |
-| **2** | Tool 2: Candidate Roster Reader | Evaluates student eligibility from CSV or Excel (`Applied Materials -- Lab Allocation.xlsx`). |
+| **2** | Tool 2: Candidate Roster Reader | Evaluates student eligibility from CSV or Excel (`student_allocation.xlsx`). |
 | **3** | Tool 3: Domain Calculator | Verifies mathematical marks balance, question pool sufficiency, and grading time. |
 | **4** | Natural Language Tool Calling | Dynamically discovers files from natural language queries and chains all tools together. |
 | **5** | Strict Error Handling | Proves strict rejection on missing files or unsupported file formats. |
@@ -216,18 +216,18 @@ python lab2_demo.py
 
 ## 6. Real Demonstration Examples
 
-### Query: Applied Materials Excel Allocation
+### Query: Excel Allocation Spreadsheet
 ```text
-Enter your request: Go throught this Applied Materials -- Lab Allocation.xlxs and count the number of sstudents
+Enter your request: Go through this student_allocation.xlxs and count the number of students
 ```
 **Output:**
 ```text
 🔀 Execution Flow:
-   User Request -> Agent -> Candidate Roster Reader using 'data/Applied Materials -- Lab Allocation.xlsx' -> Agent -> Verified Result
+   User Request -> Agent -> Candidate Roster Reader using 'data/student_allocation.xlsx' -> Agent -> Verified Result
 
 🛠️ Tools Invoked: CandidateRosterReaderTool
 
-[CANDIDATE ROSTER] Candidate Roster Verification (Applied Materials -- Lab Allocation.xlsx):
+[CANDIDATE ROSTER] Candidate Roster Verification (student_allocation.xlsx):
   • File Format: EXCEL
   • Total Students Evaluated / Counted: 256 students
   • Eligible Students: 256 students

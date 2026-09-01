@@ -187,37 +187,37 @@ Clarifying Question:
 ### Dynamic Semantic File Discovery & Typo Tolerance
 The agent evaluates user prompts against available files in `data/`:
 * **Typo Tolerance**: Automatically corrects `.xlxs` $\rightarrow$ `.xlsx`.
-* **Semantic Token Matching**: Recognizes terms like `"Applied Materials"`, `"OS"`, `"CSE"`, `"Agentic AI"`, `"allocation"` and routes to the exact file.
+* **Semantic Token Matching**: Recognizes terms like `"roster"`, `"OS"`, `"candidate"`, `"Agentic AI"`, `"allocation"` and routes to the matching file.
 
 ---
 
 ### Lab 2 Prompt Examples & Interactive Flows
 
-#### Example 1: Reading Excel Allocation Spreadsheet (`Applied Materials -- Lab Allocation.xlsx`)
+#### Example 1: Reading Excel Allocation Spreadsheet (`student_lab_allocation.xlsx`)
 **Run**: `python lab2_demo.py` $\rightarrow$ Option `4`
 
 **User Input:**
 ```text
-Go throught this Applied Materials -- Lab Allocation.xlxs and count the number of sstudents
+Go through this student_lab_allocation.xlxs and count the number of students
 ```
 
 **Agent Execution Output:**
 ```text
 🔀 Execution Flow:
-   User Request -> Agent -> Candidate Roster Reader using 'data/Applied Materials -- Lab Allocation.xlsx' -> Agent -> Verified Result
+   User Request -> Agent -> Candidate Roster Reader using 'data/student_lab_allocation.xlsx' -> Agent -> Verified Result
 
 🛠️ Tools Invoked: CandidateRosterReaderTool
 📁 Files Discovered & Selected:
 {
   "question_pool_file": null,
-  "candidate_roster_file": "data/Applied Materials -- Lab Allocation.xlsx"
+  "candidate_roster_file": "data/student_lab_allocation.xlsx"
 }
 
 🤖 Verified Agent Response:
 Verified Report for Request:
-'Go throught this Applied Materials -- Lab Allocation.xlxs and count the number of sstudents'
+'Go through this student_lab_allocation.xlxs and count the number of students'
 
-[CANDIDATE ROSTER] Candidate Roster Verification (Applied Materials -- Lab Allocation.xlsx):
+[CANDIDATE ROSTER] Candidate Roster Verification (student_lab_allocation.xlsx):
   • File Format: EXCEL
   • Total Students Evaluated / Counted: 256 students
   • Eligible Students: 256 students
@@ -253,16 +253,16 @@ Read the OS question bank. Check whether the question pool contains enough 1 mar
 
 ---
 
-#### Example 3: Full Multi-Tool Chaining (PDF + Excel + Domain Calculator)
+#### Example 3: Full Multi-Tool Chaining (PDF + CSV Roster + Domain Calculator)
 **User Input:**
 ```text
-Read the OS question bank and Applied Materials allocation. Check whether the question pool contains enough 1 mark questions to conduct a 60 mark exam and count the students from the Excel file.
+Read the OS question bank and student roster CSV. Check whether the question pool contains enough 1 mark questions to conduct a 60 mark exam and count the students.
 ```
 
 **Agent Execution Output:**
 ```text
 🔀 Execution Flow:
-   User Request -> Agent -> Question Pool Reader ('data/os_questions.pdf') -> Candidate Roster Reader ('data/Applied Materials -- Lab Allocation.xlsx') -> Domain Calculator / Checker -> Agent -> Verified Result
+   User Request -> Agent -> Question Pool Reader ('data/os_questions.pdf') -> Candidate Roster Reader ('data/student_roster.csv') -> Domain Calculator / Checker -> Agent -> Verified Result
 
 🛠️ Tools Invoked: QuestionPoolReaderTool, CandidateRosterReaderTool, DomainCalculatorTool
 
@@ -270,9 +270,11 @@ Read the OS question bank and Applied Materials allocation. Check whether the qu
   • Total Questions Extracted: 100 (40 MCQs, 60 Subjective)
   • Sufficiency Check: [SHORTAGE] (Pool contains 40 MCQs; 20 additional required)
 
-[CANDIDATE ROSTER] Candidate Roster Verification (Applied Materials -- Lab Allocation.xlsx):
-  • File Format: EXCEL
-  • Total Students Evaluated / Counted: 256 students
+[CANDIDATE ROSTER] Candidate Roster Verification (student_roster.csv):
+  • File Format: CSV
+  • Total Students Evaluated / Counted: 8 students
+  • Eligible Students: 4 students
+  • Disqualified Students: 3 students
 
 [DOMAIN CHECK] Domain Calculation & Feasibility Check:
   • Mathematical Marks Balance: [MISMATCH]
